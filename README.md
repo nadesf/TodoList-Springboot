@@ -76,11 +76,15 @@ curl http://localhost:8080/api/test/log-error?message=Test+erreur
 
 ## Console H2
 
-La console H2 est accessible à : http://localhost:8080/h2-console
+~~La console H2 n'est plus disponible car nous utilisons maintenant SQLite.~~
 
-- JDBC URL: `jdbc:h2:mem:todolistdb`
-- Username: `sa`
-- Password: (vide)
+## Base de données SQLite
+
+L'application utilise SQLite pour stocker les tâches de manière persistante.
+
+- Fichier de base de données: `todolist.db`
+- Les données persistent entre les redémarrages de l'application
+- Aucune configuration supplémentaire nécessaire
 
 ## Structure du projet
 
@@ -120,7 +124,9 @@ todolist-springboot/
 
 - **Spring Boot 3.2.1** - Framework Java
 - **Spring Data JPA** - Persistance des données
-- **H2 Database** - Base de données en mémoire
+- **SQLite** - Base de données embarquée
+- **Sentry** - Monitoring et gestion des erreurs
+- **OpenTelemetry** - Observabilité et tracing
 - **Thymeleaf** - Moteur de templates
 - **Bootstrap 5** - Framework CSS
 - **Lombok** - Réduction du code boilerplate
