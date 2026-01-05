@@ -1,0 +1,27 @@
+
+services:
+  todolist-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: todolist-springboot
+    ports:
+      - "8080:8080"
+    environment:
+      # Configuration Sentry pour l'agent OpenTelemetry
+      - SENTRY_DSN=https://7f0ca0ae0b6c14ee64999d8749ae6039@local-apm.bmiwfs-tech.com/6
+      - OTEL_SERVICE_NAME=todolist-springboot
+      # Activer l'exportation des traces vers Sentry via OTLP
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://10.226.1.235:4318
+      - OTEL_EXPORTER_OTLP_HEADERS=sentry-trace-id=true
+      # Activer tous les exportateurs vers Sentry
+      - OTEL_METRICS_EXPORTER=otlp
+      - OTEL_LOGS_EXPORTER=otlp
+    restart: unless-stopped
+    networks:
+      - todolist-network
+
+networks:
+  todolist-network:
